@@ -5,6 +5,7 @@ public class GumballMachine implements IGumballMachine {
     final String NO_QUARTER = GumballMachineState.NO_QUARTER.name();
     final String HAS_QUARTER = GumballMachineState.HAS_QUARTER.name();
     final String SOLD = GumballMachineState.GUMBALL_SOLD.name();
+
     private String id;
     String state = SOLD_OUT;
     int count = 0;
@@ -35,14 +36,55 @@ public class GumballMachine implements IGumballMachine {
 
     @Override
     public TransitionResult ejectQuarter() {
-        //TODO
-        return null;
+        boolean succeeded = false;
+        String message = "";
+        if (state.equalsIgnoreCase(HAS_QUARTER)) {
+            state = NO_QUARTER;
+            message = "Have your quarter";
+            succeeded = true;
+        } else if (state.equalsIgnoreCase(NO_QUARTER)) {
+            message = "There is no quarter";
+        } else if (state.equalsIgnoreCase(SOLD_OUT)) {
+            message = "There is no quarter or gumballs";
+        } else if (state.equalsIgnoreCase(SOLD)) {
+            message = "You cant have it back after buying";
+        }
+        return new TransitionResult(succeeded, message, state, count);
     }
 
     @Override
     public TransitionResult turnCrank() {
-        //TODO
-        return null;
+        boolean succeeded = false;
+        String message = "";
+        if (state.equalsIgnoreCase(HAS_QUARTER)) {
+            message = "Readying Gumball";
+            state = NO_QUARTER;
+            succeeded = true;
+        } else if (state.equalsIgnoreCase(NO_QUARTER)) {
+            message = "You have no quarter";
+        } else if (state.equalsIgnoreCase(SOLD_OUT)) {
+            message = "Sorry there are no gumballs to give";
+        } else if (state.equalsIgnoreCase(SOLD)) {
+            message = "Please wait, we're already giving you a gumball";
+        }
+        return new TransitionResult(succeeded, message, state, count);
+    }
+
+    public TransitionResult dispense(){
+        boolean succeeded = false;
+        String message = "";
+        if(turnCrank().succeeded()){
+            message = "Here is the gumball";
+            succeeded = true;
+            count--;
+        }
+        else{
+            message = "No gumball for you";
+        }
+        state = NO_QUARTER;
+
+        return new TransitionResult(succeeded,message, state, count);
+
     }
 
     @Override
