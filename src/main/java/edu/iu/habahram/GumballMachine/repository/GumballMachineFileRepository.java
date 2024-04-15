@@ -114,4 +114,8 @@ public class GumballMachineFileRepository implements IGumballRepository {
         Files.write(path, gumballsAsText, StandardCharsets.UTF_8);
         return id;
     }
+
+    public void refill(){
+
+    }
 }

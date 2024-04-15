@@ -45,4 +45,13 @@ public class GumballMachineController {
             throw new RuntimeException(e);
         }
     }
+
+    @PutMapping("/refill")
+    public void refill(@RequestBody int id, int count){
+        try{
+            gumballService.refill(id,count);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
 }

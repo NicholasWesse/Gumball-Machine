@@ -74,4 +74,9 @@ public class GumballService implements IGumballService{
     public String save(GumballMachineRecord gumballMachineRecord) throws IOException {
         return gumballRepository.save(gumballMachineRecord);
     }
+
+    @Override
+    public void refill(int id, int count){
+        gumballRepository.refill(id,count);
+    }
 }

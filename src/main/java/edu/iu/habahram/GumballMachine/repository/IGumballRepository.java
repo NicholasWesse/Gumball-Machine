@@ -11,4 +11,6 @@ public interface IGumballRepository {
     GumballMachineRecord findById(String id) throws IOException;
 
     String save(GumballMachineRecord gumballMachineRecord) throws IOException;
+
+    void refill(int id,int count);
 }

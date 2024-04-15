@@ -2,6 +2,7 @@ package edu.iu.habahram.GumballMachine.service;
 
 import edu.iu.habahram.GumballMachine.model.GumballMachineRecord;
 import edu.iu.habahram.GumballMachine.model.TransitionResult;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,4 +18,5 @@ public interface IGumballService {
 
     String save(GumballMachineRecord gumballMachineRecord) throws IOException;
 
+    void refill(int id,int count) throws IOException;
 }
