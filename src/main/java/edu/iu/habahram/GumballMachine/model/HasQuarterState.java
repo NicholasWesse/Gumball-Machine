@@ -21,17 +21,23 @@ public class HasQuarterState implements IState{
     }
     @Override
     public TransitionResult turnCrank() {
+
         String message = "Processing Gumball";
         boolean succeeded = true;
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
     }
     @Override
     public TransitionResult dispense() {
+
         String message = "Here is a gumball";
         boolean succeeded = true;
         gumballMachine.changeTheStateTo(GumballMachineState.NO_QUARTER);
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+    }
 
+    @Override
+    public void refill(int c){
+        gumballMachine.refill(c);
     }
     @Override
     public String getTheName() {

@@ -10,7 +10,7 @@ public class GumballMachine implements IGumballMachine {
     IState hasQuarterState;
     IState soldState;
 
-    private String id;
+
     IState state = soldOutState;
     int count = 0;
 
@@ -111,6 +111,11 @@ public class GumballMachine implements IGumballMachine {
     @Override
     public void releaseBall() {
 
+    }
+
+    @Override
+    public void refill(int count2){
+        count += count2;
     }
 
 
